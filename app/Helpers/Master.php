@@ -168,6 +168,8 @@ class Master
                 $seskey = Session::get('name');
             }else if($param == "role_id"){
                 $seskey = Session::get('role_id');
+            }else if($param == "menu"){
+                $seskey = Session::get('menu');
             } 
         }
 

@@ -12,10 +12,15 @@
         </div>
     </div> --}}
     <div id="main-wrapper">
-        <div class="nav-header">
-            <a href="" class="brand-logo">
-                <img style="width: 230px;" src="{{ asset('template/admin/images/logoapps.png') }}" >
+        <div class="nav-header" style="background-color: #3A9B94">
+            <a href="/" class="brand-logo">
+            {{-- <img style="min-width: 210px;" src="{{ asset('template/admin/images/logoapps2.png') }}" > --}}
+                <div class="mx-auto">
+                    &nbsp;&nbsp;&nbsp;MI APOTEK
+                </div>
             </a>
+        
+            
             {{-- <div class="nav-control">
                 <div class="hamburger">
                     <span class="line">

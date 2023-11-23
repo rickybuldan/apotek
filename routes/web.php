@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\JsonDataController;
 use App\Models\MenusAccess;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GenerateController;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/generateview', [GenerateController::class, 'generateview']);
 Route::get('/gendataview', [GenerateController::class, 'gendataview']);
 
+Route::get('/invoicepengadaan', [InvoiceController::class, 'invoicePengadaan']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [GeneralController::class, 'based']);
@@ -35,18 +38,25 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/generate', [GenerateController::class, 'generate'])->name('generate');
     });
 
-    
-
-
-    $allowedRoutes = MenusAccess::all();
-    foreach ($allowedRoutes as $routeData) {
-        // Route::middleware(['role:' . $routeData->role])->group(function () use ($routeData) {
-            // Anda dapat menggunakan $routeData->id untuk mengidentifikasi setiap entri secara unik
-            if ($routeData->param_type == "VIEW"){
-                Route::get($routeData->url, [GeneralController::class, $routeData->method])->name($routeData->name);
-            }else{
-                Route::post($routeData->url, [JsonDataController::class, $routeData->method])->name($routeData->name);
-            }
-        // });
+    if(Session::get('menu')){
+        $allowedRoutes = Session::get('menu');
+    }else{
+       Session::put('menu', MenusAccess::all());
+       $allowedRoutes = Session::get('menu');
+    //    dd($allowedRoutes);
+    }
+   
+    if($allowedRoutes) {
+        foreach ($allowedRoutes as $routeData) {
+            // Route::middleware(['role:' . $routeData->role])->group(function () use ($routeData) {
+                // Anda dapat menggunakan $routeData->id untuk mengidentifikasi setiap entri secara unik
+                if ($routeData->param_type == "VIEW"){
+                    Route::get($routeData->url, [GeneralController::class, $routeData->method])->name($routeData->name);
+                }else{
+                    Route::post($routeData->url, [JsonDataController::class, $routeData->method])->name($routeData->name);
+                }
+            // });
+        }
     }
 });
+

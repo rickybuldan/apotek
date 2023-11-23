@@ -5,12 +5,19 @@ $.ajaxSetup({
 });
 
 // console.log(1);
-getMenuAccess();
+$(document).ready(function() {
+    // // Delay the execution of getMenuAccess() by 2 seconds
+    // setTimeout(function() {
+    //     getMenuAccess();
+    // }, 1000); // 2000 milliseconds = 2 seconds
+    getMenuAccess();
+});
+
 function getMenuAccess() {
     $.ajax({
         url: baseURL + "/getAccessMenu",
         type: "POST",
-        data: { uid: 1 },
+        data: JSON.stringify({ uid: 2}),
         dataType: "json",
         contentType: "application/json",
         beforeSend: function () {
@@ -78,4 +85,14 @@ function getMenuAccess() {
             sweetAlert("Oops...", xhr.responseText, "error");
         },
     });
+}
+
+
+function validationSwalFailed(param, isText) {
+    // console.log(param);
+    if (param == "" || param == null) {
+        sweetAlert("Oops...", isText, "warning");
+
+        return 1;
+    }
 }

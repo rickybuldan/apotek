@@ -31,37 +31,40 @@
             <div class="row justify-content-center h-100 align-items-center">
                 <div class="col-md-6">
                     <div class="authincation-content">
+						{{-- <div class="row">
+							<div class="text-center mb-3">
+								<a href="index.html"><img src="{{asset('template/admin/images/logoapps.png')}}" alt=""></a>
+							</div>
+						</div> --}}
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form">
-									<div class="text-center mb-3">
-										<a href="index.html"><img src="{{asset('template/admin/images/logoapps.png')}}" alt=""></a>
-									</div>
-                                    <h4 class="text-center mb-4">Sign in your account</h4>
+									<h4 class="text-center mb-4">Manajemen Inventori Apotek</h4>
+                                    <h4 class="text-center mb-4">Login</h4>
 									<form action="{{ route('login') }}" method="POST" class=" dz-form pb-3">
 										@csrf
 									
 										<div class="dz-separator-outer m-b5">
 											<div class="dz-separator bg-primary style-liner"></div>
 										</div>
-										<p>Enter your e-mail address and your password. </p>
+										<p>Masukkan email dan password anda. </p>
 										<div class="form-group mb-3">
-											<input type="email"  name="email" id="email" class="form-control" placeholder="hello@example.com">
+											<input type="email"  name="email" id="email" class="form-control" placeholder="email@example.com">
 										</div>
 										<div class="form-group mb-3">
-											<input type="password"  name="password" id="password" class="form-control" placeholder="your password">
+											<input type="password"  name="password" id="password" class="form-control" placeholder="password">
 										</div>
 										@if ($errors->has('email'))
 											<div class="form-group mb-3">
 												<span class="badge bg-danger mb-2">{{ $errors->first('email') }}</span>
 											</div>
 										@endif
-										<div class="form-group text-left mb-5 forget-main">
-											<button type="submit" class="btn btn-primary">Sign Me In</button>
-											<span class="form-check d-inline-block">
+										<div class="form-group text-center mb-6 forget-main">
+											<button type="submit" class="btn btn-success">Masuk</button>
+											{{-- <span class="form-check d-inline-block">
 												<input type="checkbox" class="form-check-input" id="check1" name="example1">
 												<label class="form-check-label" for="check1">Remember me</label>
-											</span>
+											</span> --}}
 											<!-- <button class="nav-link m-auto btn tp-btn-light btn-primary forget-tab " id="nav-forget-tab" data-bs-toggle="tab" data-bs-target="#nav-forget" type="button" role="tab" aria-controls="nav-forget" aria-selected="false">Forget Password ?</button> 	 -->
 										</div>
 										<!-- <div class="dz-social ">
@@ -74,9 +77,9 @@
 											</ul>
 										</div> -->
 									</form>
-                                    <div class="new-account mt-3">
+                                    {{-- <div class="new-account mt-3">
                                         <p>Not have an account? <a class="text-primary" href="{{route('sign-up')}}">Sign up</a></p>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

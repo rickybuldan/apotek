@@ -1,12 +1,17 @@
 @extends('layout.default')
+@push('after-style')
+    @foreach ($cssFiles as $file)
+        <link rel="stylesheet" href="{{ $file }}">
+    @endforeach
+@endpush
 @section('content')
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header mt-2 flex-wrap d-flex justify-content-between">
                     <div>
-                        <h4 class="card-title">Products</h4>
-                        <p class="m-0 subtitle">Add <code>Patient</code> class with <code>datatables</code></p>
+                        <h4 class="card-title">Obat</h4>
+                        {{-- <p class="m-0 subtitle">Add <code>Patient</code> class with <code>datatables</code></p> --}}
                     </div>
                     <ul class="nav nav-tabs dzm-tabs" id="myTab-4" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -25,9 +30,11 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
+                                    <th>Nama Obat</th>
+                                    <th>Satuan</th>
+                                    <th>Harga Jual</th>
+                                    <th>Harga Beli</th>
+                                    <th>Stok Minimum</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -51,24 +58,38 @@
                     <div class="basic-form">
                         <form>
                             <div class="mb-3 row">
-                                <label class="col-sm-3 col-form-label">Name</label>
+                                <label class="col-sm-3 col-form-label">Nama Obat</label>
                                 <div class="col-sm-9">
                                     <input id="form-name" type="text" class="form-control" placeholder="">
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-3 col-form-label">Price</label>
-                                <div class="col-sm-9">
-                                    <input id="form-price" type="number" class="form-control" placeholder="">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-3 col-form-label">Stock</label>
-                                <div class="col-sm-9">
-                                    <input id="form-stock" type="number" class="form-control" min="1" placeholder="">
-                                </div>
-                            </div>
                             
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label">Harga Beli</label>
+                                <div class="col-sm-9">
+                                    <input id="form-harga-beli" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label">Harga Jual</label>
+                                <div class="col-sm-9">
+                                    <input id="form-harga-jual" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label">Stok Minimum</label>
+                                <div class="col-sm-9">
+                                    <input id="form-stok-minimum" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label">Satuan</label>
+                                <div class="col-sm-9">
+                                    <select id="form-satuan">
+
+                                    </select>
+                                </div>
+                            </div>
 
                         </form>
                     </div>
@@ -82,5 +103,12 @@
     </div>
 @endsection
 @push('after-script')
-    <script src="{{ $javascriptFile }}"></script>
+    <script> 
+        @foreach ($varJs as $varjsi)
+            {!! $varjsi !!}
+        @endforeach
+    </script>        
+    @foreach ($javascriptFiles as $file)
+        <script src="{{ $file }}"></script>
+    @endforeach
 @endpush

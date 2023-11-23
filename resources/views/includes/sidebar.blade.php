@@ -1,4 +1,4 @@
-<div class="deznav">
+<div class="deznav" style="background-color:#296d6a">
     <div class="deznav-scroll isSidebarMenu">
         <ul class="metismenu" id="menu">
             <li class="menu-title">DASHBOARD</li>

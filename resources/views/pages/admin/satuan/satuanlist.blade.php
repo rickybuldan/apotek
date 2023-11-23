@@ -1,17 +1,17 @@
 @extends('layout.default')
 @push('after-style')
-
-
+    @foreach ($cssFiles as $file)
+        <link rel="stylesheet" href="{{ $file }}">
+    @endforeach
 @endpush
-
 @section('content')
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header mt-2 flex-wrap d-flex justify-content-between">
                     <div>
-                        <h4 class="card-title">Employee Services</h4>
-                        <p class="m-0 subtitle">Add <code>Patient</code> class with <code>datatables</code></p>
+                        <h4 class="card-title">Satuan</h4>
+                        {{-- <p class="m-0 subtitle">Add <code>Patient</code> class with <code>datatables</code></p> --}}
                     </div>
                     <ul class="nav nav-tabs dzm-tabs" id="myTab-4" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -30,8 +30,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Employee Name</th>
-                                    <th>Service Name</th>
+                                    <th>Nama Satuan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -55,21 +54,13 @@
                     <div class="basic-form">
                         <form>
                             <div class="mb-3 row">
-                                <label class="col-sm-3 col-form-label">Employee Name</label>
+                                <label class="col-sm-3 col-form-label">Nama Satuan</label>
                                 <div class="col-sm-9">
-                                    <select id="form-employee">
-
-                                    </select>
+                                    <input id="form-name" type="text" class="form-control" placeholder="">
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-3 col-form-label">Service Name</label>
-                                <div class="col-sm-9">
-                                    <select id="form-service">
-
-                                    </select>
-                                </div>
-                            </div>
+                           
+                           
                         </form>
                     </div>
                 </div>
@@ -82,5 +73,12 @@
     </div>
 @endsection
 @push('after-script')
-    <script src="{{ $javascriptFile }}"></script>
+    <script> 
+        @foreach ($varJs as $varjsi)
+            {!! $varjsi !!}
+        @endforeach
+    </script>        
+    @foreach ($javascriptFiles as $file)
+        <script src="{{ $file }}"></script>
+    @endforeach
 @endpush
