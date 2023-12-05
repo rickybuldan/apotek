@@ -4,6 +4,7 @@ namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use App\Models\MenusAccess;
 class Master
 {
     const INFO_SUCCESS = 'Success';
@@ -73,13 +74,15 @@ class Master
                 return $status;
             }
         
-            $saved = DB::select("SELECT * FROM menus_access ma LEFT JOIN users_access ua ON ma.id = ua.menu_access_id WHERE ua.role_id =".$role_id. " AND ma.url ='".$route."'". " AND ua.i_view=1");
-            
-            if (count($saved) > 0) {
+            $saved = DB::select("SELECT * FROM menus_access ma LEFT JOIN users_access ua ON ma.id = ua.menu_access_id WHERE ua.role_id =".$role_id. " AND ma.url ='".$route."'");
+         
+            if ($saved[0]->i_view == 1) {
                 $status=[
                     'code'=> self::CODE_SUCCESS,
                     'info'=> self::INFO_SUCCESS,
                 ];
+            }else if ($saved[0]->i_view == 0) {
+                return abort(403);
             }else{
                 $status=[
                     'code'=>  '1',
@@ -93,7 +96,6 @@ class Master
                 'info'=> self::INFO_FAILED,
             ];
         }
-
         return $status;
     }
 
@@ -172,6 +174,7 @@ class Master
                 $seskey = Session::get('menu');
             } 
         }
+
 
         return $seskey;
     }

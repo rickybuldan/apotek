@@ -40,11 +40,16 @@ Route::middleware(['auth'])->group(function () {
 
     if(Session::get('menu')){
         $allowedRoutes = Session::get('menu');
+        dd($allowedRoutes);
     }else{
        Session::put('menu', MenusAccess::all());
        $allowedRoutes = Session::get('menu');
     //    dd($allowedRoutes);
     }
+    // $allowedRoutes = Cache::rememberForever('menu', function () {
+    //     // Ambil data menu dari database jika tidak ada di cache
+    //     return MenusAccess::all();
+    // });
    
     if($allowedRoutes) {
         foreach ($allowedRoutes as $routeData) {

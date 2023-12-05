@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Models\MenusAccess;
+
+
+
 
 class AuthController extends Controller
 {
@@ -31,7 +33,6 @@ class AuthController extends Controller
         //     $field => $login,
         //     'password' => $password
         // ];
-
         if (Auth::attempt($credentials)) {
            
             if ( Auth::user()->roles->first()->role_name == "Customer" ) {
@@ -43,9 +44,7 @@ class AuthController extends Controller
                 Session::put('user_id', Auth::user()->id);
                 Session::put('name', Auth::user()->name);
                 Session::put('role_id', Auth::user()->role_id);
-                
-                
-                // dd(Session::get('menu'));
+            
                 return redirect()->intended('/dashboard');
             }
             
